@@ -3,15 +3,16 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
 	id("org.springframework.boot") version "2.1.6.RELEASE"
 	id("io.spring.dependency-management") version "1.0.7.RELEASE"
+	id("com.sourcemuse.mongo") version "1.0.7"
 	kotlin("jvm") version "1.2.71"
 	kotlin("plugin.spring") version "1.2.71"
 }
 
-group = "com.example"
+group = "com.excella"
 version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_1_8
 
-val developmentOnly by configurations.creating
+val developmentOnly : Configuration by configurations.creating
 configurations {
 	runtimeClasspath {
 		extendsFrom(developmentOnly)
@@ -33,6 +34,14 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("de.flapdoodle.embed:de.flapdoodle.embed.mongo")
 	testImplementation("io.projectreactor:reactor-test")
+}
+
+tasks.withType<Test> {
+	systemProperty("spring.profiles.active", "test")
+	mongo {
+		mongoVersion = "4.0.1"
+		logging = "console"
+	}
 }
 
 tasks.withType<KotlinCompile> {

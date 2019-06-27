@@ -1,18 +1,14 @@
 package com.excella.tcp.service
 
+import com.excella.tcp.common.NotFoundException
 import com.excella.tcp.domain.DomainModel
 import com.excella.tcp.domain.Employee
 import com.excella.tcp.repository.EmployeeRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Sort
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository
-import org.springframework.http.HttpStatus
-import org.springframework.web.bind.annotation.ResponseStatus
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
-
-@ResponseStatus(HttpStatus.NOT_FOUND)
-class NotFoundException(override val message: String) : Exception(message)
 
 abstract class CrudService<T : DomainModel> {
     fun all(sort: Sort): Flux<T> = repository.findAll(sort)

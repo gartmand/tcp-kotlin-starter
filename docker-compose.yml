@@ -1,7 +1,7 @@
 version: '3.7'
 services:
   api:
-    image: openjdk:11
+    image: openjdk:8
     container_name: api
     stdin_open: true
     volumes:
@@ -15,10 +15,6 @@ services:
       DB_PORT: 27017
       DB_USER: api_user
       DB_PASSWORD: api_password
-      JWT_KEY_STORE: ${JWT_KEY_STORE}
-      JWT_KEY_STORE_PASS: ${JWT_KEY_STORE_PASS}
-      JWT_KEYPAIR_ALIAS: ${JWT_KEYPAIR_ALIAS}
-      JWT_KEYPAIR_PASS: ${JWT_KEYPAIR_PASS}
     depends_on:
       - db
     working_dir: /app
@@ -37,4 +33,4 @@ services:
       - "27017:27017"
 volumes:
   mongo_db:
-gradle_cache:
+  gradle_cache:

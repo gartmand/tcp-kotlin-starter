@@ -1,3 +1,8 @@
+spring:
+  profiles: test
+  data.mongodb:
+    port: 0
+
 server.port: 8080
 management:
   endpoints:
@@ -8,12 +13,5 @@ management:
     health.enabled: true
     health.show-details: always
 
-spring.data.mongodb:
-  authentication-database: admin
-  database: tcp
-  username: ${DB_USER}
-  password: ${DB_PASSWORD}
-  host: ${DB_HOST}
-  port: ${DB_PORT}
-
 server.servlet.context-path: /api
+
