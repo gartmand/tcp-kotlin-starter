@@ -1,0 +1,30 @@
+server.port: 8080
+management:
+  endpoints:
+    web.base-path: /
+    web.exposure.include: "*"
+    enabled-by-default: true
+  endpoint:
+    health.enabled: true
+    health.show-details: always
+
+spring.data.mongodb:
+  authentication-database: admin
+  database: tcp
+  username: ${DB_USER}
+  password: ${DB_PASSWORD}
+  host: ${DB_HOST}
+  port: ${DB_PORT}
+
+server.servlet.context-path: /api
+
+security:
+  oauth2:
+    client:
+      client-id: app
+      client-secret: $2a$04$hqawBldLsWkFJ5CVsvtL7ed1z9yeoknfuszPOEHWzxfLBoViK6OVi
+  jwt:
+    key-store: "${JWT_KEY_STORE}"
+    key-store-password: "${JWT_KEY_STORE_PASS}"
+    key-pair-alias: "${JWT_KEYPAIR_ALIAS}"
+key-pair-password: "${JWT_KEYPAIR_PASS}"
