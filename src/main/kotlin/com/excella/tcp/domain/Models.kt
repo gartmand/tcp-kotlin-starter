@@ -19,7 +19,11 @@ abstract class DomainModel {
 
 @Document
 @TypeAlias("employee")
-data class Employee(val bio: Bio, val contact: Contact) : DomainModel()
+data class Employee(
+        @field:Valid
+        val bio: Bio,
+        @field:Valid
+        val contact: Contact) : DomainModel()
 
 data class Bio(
         @field:NotEmpty
@@ -32,7 +36,7 @@ data class Bio(
         @field:Past
         @field:JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
         @field:JsonSerialize(using = LocalDateSerializer::class)
-        @field: JsonDeserialize(using = LocalDateDeserializer::class)
+        @field:JsonDeserialize(using = LocalDateDeserializer::class)
         val birthDate: LocalDate?,
 
         @field:NotNull
