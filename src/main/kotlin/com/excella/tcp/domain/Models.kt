@@ -21,27 +21,50 @@ abstract class DomainModel {
 @TypeAlias("employee")
 data class Employee(val bio: Bio, val contact: Contact) : DomainModel()
 
-data class Bio(@NotEmpty val firstName: String,
-               val middleName: String?,
-               @NotEmpty val lastName: String,
-               @Past @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-               @JsonSerialize(using = LocalDateSerializer::class)
-               @JsonDeserialize(using = LocalDateDeserializer::class)
-               val birthDate: LocalDate,
-               @Valid val gender: Gender,
-               @Valid val ethnicity: Ethnicity)
+data class Bio(
+        @field:NotEmpty
+        val firstName: String?,
+        val middleName: String?,
 
-data class Contact(@NotEmpty @Email val email: String,
-                   @Pattern(regexp = "\\d{10}",
-                           message = "Phone number must consist of 10 digits")
-                   val phoneNumber: String,
-                   @Valid val address: Address)
+        @field:NotEmpty
+        val lastName: String?,
 
-data class Address(val line1: String?,
-                   val line2: String?,
-                   val city: String?,
-                   @Size(min = 2, max = 2) val stateCode: String,
-                   val zipCode: String?)
+        @field:Past
+        @field:JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+        @field:JsonSerialize(using = LocalDateSerializer::class)
+        @field: JsonDeserialize(using = LocalDateDeserializer::class)
+        val birthDate: LocalDate?,
+
+        @field:NotNull
+        val gender: Gender?,
+
+        @field:NotNull val ethnicity: Ethnicity?
+)
+
+data class Contact(
+        @field:NotEmpty
+        @field:Email
+        val email: String?,
+
+        @field:Pattern(regexp = "\\d{10}",
+                message = "Phone number must consist of 10 digits")
+        @field:NotEmpty
+        val phoneNumber: String?,
+
+        @field:Valid
+        val address: Address?
+)
+
+data class Address(
+        val line1: String?,
+        val line2: String?,
+        val city: String?,
+
+        @field:Size(min = 2, max = 2)
+        val stateCode: String?,
+
+        val zipCode: String?
+)
 
 enum class Gender {
     MALE, FEMALE, OTHER
