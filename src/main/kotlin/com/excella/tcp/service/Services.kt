@@ -4,7 +4,6 @@ import com.excella.tcp.common.NotFoundException
 import com.excella.tcp.domain.DomainModel
 import com.excella.tcp.domain.Employee
 import com.excella.tcp.repository.EmployeeRepository
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository
 import org.springframework.stereotype.Service
 import reactor.core.publisher.Flux
@@ -18,7 +17,8 @@ abstract class CrudService<T : DomainModel> {
 
     fun save(t: T): Mono<T> = repository.save(t)
     fun update(id: String, t: T): Mono<T> =
-            byId(id).map { t.apply { it.id = id } }.flatMap { repository.save(it) }
+            byId(id).map { t.apply { this.id = it.id } }
+                    .flatMap { repository.save(it) }
 
 
     fun deleteById(id: String): Mono<T> =
@@ -28,5 +28,4 @@ abstract class CrudService<T : DomainModel> {
 }
 
 @Service
-class EmployeeService
-@Autowired constructor(override val repository: EmployeeRepository) : CrudService<Employee>()
+class EmployeeService(override val repository: EmployeeRepository) : CrudService<Employee>()
