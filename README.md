@@ -1,4 +1,4 @@
-# tcp-starter-kotlin
+# tcp-kotlin-starter
 
 A CRUD example using Spring WebFlux in Kotlin
 
