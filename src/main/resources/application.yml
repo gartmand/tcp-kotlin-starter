@@ -15,5 +15,3 @@ spring.data.mongodb:
   password: ${DB_PASSWORD}
   host: ${DB_HOST}
   port: ${DB_PORT}
-
-server.servlet.context-path: /api

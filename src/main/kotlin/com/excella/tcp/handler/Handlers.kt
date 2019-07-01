@@ -15,7 +15,7 @@ import reactor.core.publisher.Mono
 import javax.validation.Validator
 
 abstract class CrudHandler<T : DomainModel>(private val domainClass: Class<T>) {
-    @SuppressWarnings("unused")
+    @Suppress("UNUSED_PARAMETER")
     fun getAll(req: ServerRequest): Mono<ServerResponse> =
             ok().body(service.all(), domainClass)
 
