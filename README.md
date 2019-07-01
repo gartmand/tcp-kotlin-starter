@@ -6,9 +6,9 @@ A CRUD example using Spring WebFlux in Kotlin
 
 ##### 2. Run the application
 
-- Compile the app: `./start clean build`
+- `docker-compose up -d` exposes the application on localhost:8080
 
-- Run the application: `./start bootrun`
+- `docker-compose run -p 8080:8080 api bash` will give you a bash with the app directory mounted, from which you can manually run gradle scripts
 
 ##### 3. Play with data
 
