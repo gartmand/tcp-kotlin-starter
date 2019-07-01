@@ -10,7 +10,7 @@ A CRUD example using Spring WebFlux in Kotlin
 
 - Run the application: `./start bootrun`
 
-##### 3. Insert some data
+##### 3. Play with data
 
 The app currently only has one document spec (Employees).
 
